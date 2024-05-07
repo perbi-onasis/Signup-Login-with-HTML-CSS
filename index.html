@@ -87,6 +87,61 @@
         
   </div> <!-- /form -->
 
-  <script scr="./script.js"></script>
+  <!-- <script scr="./script.js">
+
+  </script> -->
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    
+      // Highlight label when input has value or focus
+      var formInputs = document.querySelectorAll('.form input, .form textarea');
+    
+      formInputs.forEach(function(input) {
+        input.addEventListener('keyup', function() {
+          toggleLabelClass(input);
+        });
+        input.addEventListener('blur', function() {
+          toggleLabelClass(input);
+        });
+        input.addEventListener('focus', function() {
+          toggleLabelClass(input);
+        });
+      });
+    
+      function toggleLabelClass(input) {
+        var label = input.previousElementSibling;
+        if (input.value !== '' || input === document.activeElement) {
+          label.classList.add('active', 'highlight');
+        } else {
+          label.classList.remove('active', 'highlight');
+        }
+      }
+    
+      // Tab switching functionality
+      var tabLinks = document.querySelectorAll('.tab a');
+    
+      tabLinks.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          var target = link.getAttribute('href');
+          var tabs = document.querySelectorAll('.tab');
+    
+          tabs.forEach(function(tab) {
+            tab.classList.remove('active');
+          });
+          link.parentNode.classList.add('active');
+    
+          var tabContents = document.querySelectorAll('.tab-content > div');
+          tabContents.forEach(function(content) {
+            content.style.display = 'none';
+          });
+          document.querySelector(target).style.display = 'block';
+        });
+      });
+    
+    });
+    </script>
+    
 </body>
 </html>
